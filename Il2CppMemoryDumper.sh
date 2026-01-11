@@ -33,7 +33,7 @@ fi
 
 echo "- Found target process: $pid"
 
-targets="/dev/zero global-metadata.dat libil2cpp.so "$(getprop ro.product.cpu.abilist | awk -F',' '{for (i = 1; i <= NF; i++) {gsub(/-/, "_"); print "split_config."$i".apk"}}')
+targets="/dev/zero libil2cpp.so global-metadata.dat [anon]" 
 
 for target in $targets; do
 	local maps=$(grep $target /proc/$pid/maps | awk -v OFS='|' '{for (i = 1; i <= NF; i+=6) {print $i,$(i+1),$(i+2),$(i+3),$(i+4),$(i+5)}}')
